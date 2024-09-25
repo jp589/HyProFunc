@@ -20,44 +20,44 @@ Also, keep in mind that HyProFunc is still in the early stages of development.
     - Successful submission returns tabular results in `.m8` format.
 3. Strip the tabular results of extraneous information.
 4. Parse the best structure-matching descriptions for common substrings.
-    - Returns
-       a. original header ID
-       b. percentage of descriptions containing the substring
-       c. the average SeqID of all matches containing the substring
-       d. the sequence submitted to ESMFold.
-5. Optional comparison to original annotation contained in the fasta header.
+    - Returns:  
+       a. original header ID  
+       b. percentage of descriptions containing the substring  
+       c. the average SeqID of all matches containing the substring  
+       d. the sequence submitted to ESMFold.  
+6. Optional comparison to original annotation contained in the fasta header.
     - Returns a merged table to compare inferred function to original annotation.
 
 ## Installation:
 
 Installation is simple:
 
-1. Download the Github repository to your current working directory.
-	a. If you have git bash you can simply run:
-		`$ git clone https://github.com/jp589/HyProFunc
+1. Download the Github repository to your current working directory.  
+	a. If you have git bash you can simply run:  
+		`$ git clone https://github.com/jp589/HyProFunc`  
 	b. Alternative download and extraction    
-		`$ wget https://github.com/jp589/HyProFunc/archive/refs/heads/master.zip
-	    `$ unzip -j master.zip
-	    `$ rm master.zip
-2. Add the directory containing the `HyProFunc.sh` script to your path.
-	a. Temporarily add HyProFunc to path for each session. 
-		`export PATH="path/to/HyProFunc:$PATH"
-	b. Modify PATH environment variable in system settings for permanent addition.
-3. For parsing of `.gbff` files install Biopython (Optional).
-		`pip install biopython`
-		See https://biopython.org/wiki/Download for more details.
-4. Test with example data:
-		`$ cp /your/script/location/data/Example_data.fa .`
-		`$ Hypothetical_Protein_Function.sh -c -f Example_data.fa`
+		`$ wget https://github.com/jp589/HyProFunc/archive/refs/heads/master.zip`  
+	    `$ unzip -j master.zip`  
+	    `$ rm master.zip`  
+2. Add the directory containing the `HyProFunc.sh` script to your path.  
+	a. Temporarily add HyProFunc to path for each session.   
+		    `export PATH="path/to/HyProFunc:$PATH"`   
+	b. Modify PATH environment variable in system settings for permanent addition.   
+3. For parsing of `.gbff` files install Biopython (Optional).  
+		    `pip install biopython`  
+		See https://biopython.org/wiki/Download for more details.  
+4. Test with example data:  
+		    `$ cp /your/script/location/data/Example_data.fa .`  
+		    `$ Hypothetical_Protein_Function.sh -c -f Example_data.fa`  
 ## Usage:
     HyProFunc.sh [-h] [-c] [-e] [-r] [-g genome.gbff] [-f fasta.faa] [-p 3]
 
--h  Displays help page.
--c  Optional flag to compare protein function annotation in header sequence to this script's output.
--e  Optional flag to extract amino acid sequences denoted as hypothetical in the fasta header.
--g  Optional .gbff file from which amino acid sequences will randomly be extracted and compared to this script's output.
--r  Optional flag to remove duplicate fasta entries.
--f  Fasta file containing amino acid sequences.
+-h  Displays help page.  
+-c  Optional flag to compare protein function annotation in header sequence to this script's output.  
+-e  Optional flag to extract amino acid sequences denoted as hypothetical in the fasta header.  
+-g  Optional .gbff file from which amino acid sequences will randomly be extracted and compared to this script's output.  
+-r  Optional flag to remove duplicate fasta entries.  
+-f  Fasta file containing amino acid sequences.  
 -p Optional word number (character string separated by whitespace) or regex pattern to match annotated function in fasta header. Default behavior is to extract all characters after the second whitespace. This is only needed when comparing functional annotation in the header sequence to this script's output. Example generic regex pattern: `'r">.*(.*).*\s"'
 
 Header sequence IDs are determined by default as the characters immediately following the '>' until the first whitespace.
@@ -72,9 +72,9 @@ If the '-c' option is used with '-g', only the fasta file derived from the .gbff
 
 **Keep in mind that the Biopython module is required to parse the .gbff file if included.**
 
-Each sequence is trimmed to the first 400 amino acids and then submitted to the ESMFold API:
+Each sequence is trimmed to the first 400 amino acids and then submitted to the ESMFold API:  
     "https://api.esmatlas.com/foldSequence/v1/pdb/"
-The subsequently generated .pdb file is sumbitted to the Foldseek API:
+The subsequently generated .pdb file is sumbitted to the Foldseek API:  
     "https://search.foldseek.com/api/ticket"
 as a query against three Alphafold databases: AFDB50, AFDB-SWISSPROT, AFDB-PROTEOME.
 This results in a table of structurally similar proteins.
@@ -85,7 +85,7 @@ Please keep in mind that this script utilizes APIs that are considered shared re
 As such, the ESMFold API is limited to 50 requests at a time,
 and the Foldseek API request loop will break after the rate limit has been reached.
 
-Please also note that the ESMFold API has known SSL certificate issues:
+Please also note that the ESMFold API has known SSL certificate issues:  
     "https://github.com/facebookresearch/esm/discussions/627"
 
 This script makes use of a custom SSL connection that disables hostname verification and bypasses

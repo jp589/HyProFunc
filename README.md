@@ -90,3 +90,27 @@ Please also note that the ESMFold API has known SSL certificate issues:
 
 This script makes use of a custom SSL connection that disables hostname verification and bypasses
 certificate validation, but SSL encryption is maintained for data transfer.
+
+## Example Use Cases
+
+You're new to HyProFunc, you have a genome in .gbff format and want to see what it can do. 
+The following line of code will extract amino acid sequences and compare the previously annotated function to the HyProFunc inferred function.
+
+`HyProFunc.sh -c -g genome.gbff`
+
+You have extracted a subset of amino acid sequences yourself and want to compare previous annotation to inferred function.
+
+`HyProFunc.sh -c -f fasta.faa`
+
+You are only interested in the amino acid sequences annotated as "hypothetical"
+
+`HyProFunc.sh -e -f fasta.faa`
+
+Your fasta file contains duplicate entries and you want to remove the duplicates before processing.
+
+`HyProFunc.sh -r -f fasta.faa`
+
+You're comparing annotated function to inferred function, but the annotated function is not everything that follows after the second whitespace in the header.
+In this case you would specify the word index in the header that belongs to the annotated function.
+
+`HyProFunc.sh -f fasta.faa -p 3`

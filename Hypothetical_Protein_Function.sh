@@ -78,8 +78,26 @@ while getopts "h?cerg:f:p:" opt; do
 done
 
 SCRIPT_DIR=$( cd -- "$( dirname -- "${BASH_SOURCE[0]}" )" &> /dev/null && pwd )
+
+# Get the current date and time in the format hh-mm-ss
+TIMESTAMP=$(date +"%Y-%m-%d_%H-%M-%S")
+log_file="HPFlog_${TIMESTAMP}.log"
+
+# Redirect both stdout (1) and stderr (2) to tee, appending to the log file
+exec > >(tee -a "$log_file") 2>&1
+
+echo "HyProFunc started at $TIMESTAMP"
 echo "Your current working directory is: $(pwd)"
 echo "The bash script directory was: $SCRIPT_DIR"
+
+# silent logging
+echo "Option -c was '$COMPARE'" >> "$log_file"
+echo "Option -e was '$EXTRACT'" >> "$log_file"
+echo "Option -r was '$REMOVE_DUPS'" >> "$log_file"
+echo "Option -g was '$GBFF'" >> "$log_file"
+echo "Option -f was '$ORIGINAL_FASTA'" >> "$log_file"
+echo "Option -p was '$PATTERN'" >> "$log_file"
+
 D="${SCRIPT_DIR}"
 
 # checks to make sure inputs and options are good to go
@@ -188,7 +206,7 @@ fi
 for SELECT in $FILE_LIST; do
     SBNAME=$(basename "${SELECT%.*}")
     echo "Determining protein function for sequence $SBNAME"
-    "${D}"/bin/Protein_function_inference.py ${SELECT} ${FASTA}
+    "${D}"/bin/Protein_function_inference.py ${SELECT}
 done
 
 NUM_FUNCTIONS_DETERMINED=$(($(wc -l ./${FASTB}/Protein_Functions.csv | tr ' ' '\n' | head -1) - 1))

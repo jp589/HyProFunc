@@ -117,57 +117,57 @@ In this case you would specify the word index in the header that belongs to the 
 
 ## File descriptions
 
-`/bin/AA_Sequence_Extract.py`
-    -Python script that uses Biopython to parse a .gbff or .gbk file and randomly extract a user-defined number of sequences based on a set seed.
+`/bin/AA_Sequence_Extract.py`  
+    -Python script that uses Biopython to parse a .gbff or .gbk file and randomly extract a user-defined number of sequences based on a set seed.  
     -Example Usage: `AA_Sequence_Extract.py input_file.gbff 10`
 
-`/bin/Comparison.py`
-    -Python script that merges two .csv files by the first column of each file, keeping all entries in the second file (right merge).
+`/bin/Comparison.py`  
+    -Python script that merges two .csv files by the first column of each file, keeping all entries in the second file (right merge).  
     -Example Usage: `Comparison.py file_one.csv file_two.csv file/path/to/output_dir`
 
-`/bin/ESMFold_API.py`
-    -Python script that utilizes the ESMFold API to predict protein structure based on a given amino acid sequence.
+`/bin/ESMFold_API.py`  
+    -Python script that utilizes the ESMFold API to predict protein structure based on a given amino acid sequence.  
     -Example Usage: `ESMFold_API.py input.faa output/dir/ path/to/ESM.pem`
 
-`/bin/filter_files.py`
+`/bin/filter_files.py`  
     -Python script that updates the FILE_LIST in the Hypothetical_Protein_Function.sh script.
 
-`/bin/filter_sort_fasta.py`
-    -Python script that uses Biopython to parse a fasta file, and filter out sequences shorter than the minimum length. Remaining sequences are sorted by length.
+`/bin/filter_sort_fasta.py`  
+    -Python script that uses Biopython to parse a fasta file, and filter out sequences shorter than the minimum length. Remaining sequences are sorted by length.  
     -Example Usage: `filter_sort_fasta.py input_fasta.faa output_fasta.faa 500`
 
-`/bin/Foldseek_API.py`
-    -Python script that utilizes the Foldseek API to query the predicted protein structure against three alphafold databases.
+`/bin/Foldseek_API.py`  
+    -Python script that utilizes the Foldseek API to query the predicted protein structure against three alphafold databases.  
     -Example Usage: `Foldseek_API.py input.pdb output/dir/`
 
-`/bin/Generate_substrings.py`
-    -Python script that parses the tabular Foldseek output and creates a sorted list of most common substrings at each substring length.
+`/bin/Generate_substrings.py`  
+    -Python script that parses the tabular Foldseek output and creates a sorted list of most common substrings at each substring length.  
     -Example Usage: `Generate_substrings.py Concatenated_foldseek_output.tsv`
 
-`/bin/Header_functions.py`
-    -Python script that extracts the header ID and annotated function from a fasta header. Annotated function position can be indicated with a word number or RegEx.
+`/bin/Header_functions.py`  
+    -Python script that extracts the header ID and annotated function from a fasta header. Annotated function position can be indicated with a word number or RegEx.  
     -Example Usage: `Header_functions.py input.faa output/dir/` or `Header_functions.py input.faa output/dir/ 3` or `Header_functions.py input.faa output/dir/ r">.*(.*).*\s"`
 
-`/bin/HSP.py`
-    -Python script that extracts the header IDs and their corresponding sequences from a fasta file and writes the data to a CSV file.
+`/bin/HSP.py`  
+    -Python script that extracts the header IDs and their corresponding sequences from a fasta file and writes the data to a CSV file.  
     -Example Usage: `HSP.py input.faa path/to/output/dir/`
 
-`/bin/Protein_function_inference.py`
-    -Python script to process the substrings.csv file and determine an inferred function.
-     While only the *Select*.csv file path is passed to the script, it assumes the corresponding *substrings*.csv file exists in the same location.
+`/bin/Protein_function_inference.py`  
+    -Python script to process the substrings.csv file and determine an inferred function.  
+     While only the *Select*.csv file path is passed to the script, it assumes the corresponding *substrings*.csv file exists in the same location.  
     -Example Usage: `Protein_function_inference.py Select.csv`
 
-`/bin/Remove_Fasta_Duplicates.py`
-    -Python script to remove duplicate fasta entries based on exact fasta sequence.
+`/bin/Remove_Fasta_Duplicates.py`  
+    -Python script to remove duplicate fasta entries based on exact fasta sequence.  
     -Example Usage: `Remove_Fasta_Duplicates.py input.faa output.faa`
 
-`/data/Example_data.fa`
+`/data/Example_data.fa`  
     -Three example fasta sequences extracted from the Sneathia vaginalis Sn35 annotated genome. This file can be used to confirm successful installation.
 
-`/ESM.pem`
-    -Public SSL certificate chain for *secure ESMFold API access. This file needs to remain in the same directory as the bash script `Hypothetical_Protein_Function.sh`.
-     Workaround for "https://github.com/facebookresearch/esm/discussions/627".
+`/ESM.pem`  
+    -Public SSL certificate chain for *secure ESMFold API access. This file needs to remain in the same directory as the bash script `Hypothetical_Protein_Function.sh`.  
+     Workaround for "https://github.com/facebookresearch/esm/discussions/627".  
     *Hostname verification is disabled and certificate validation is bypassed, but SSL encryption is maintained.
 
-`/Hypothetical_Protein_Function.sh`
+`/Hypothetical_Protein_Function.sh`  
     -The main bash script that utilizes the above python scripts to infer a protein function based on a given amino acid sequence.

@@ -6,10 +6,10 @@ import os
 from Bio import SeqIO
 
 # Input and output file paths
-# Input gbff
+# Input gbff/gbk
 input_file = sys.argv[1]
-if not input_file.endswith('.gbff'):
-    print(f"{sys.argv[1]} is not a .gbff file.")
+if not (input_file.endswith('.gbff') or input_file.endswith('.gbk')):
+    print(f"{sys.argv[1]} is not a .gbff or .gbk file.")
     sys.exit(0)
 
 # Function to optionally set the seed
@@ -48,7 +48,7 @@ print(f"Using seed: {seed}")
 random_sequences = random.sample(sequences, min(int(sys.argv[2]), len(sequences)))
 
 # output fasta (.faa)
-output_file = os.path.basename(input_file).replace('.gbff', '_random_seqs') + "_seed" + str(seed) + ".faa"
+output_file = os.path.basename(input_file).replace('.gb*', '_random_seqs') + "_seed" + str(seed) + ".faa"
 
 # Write the selected sequences to a FASTA file
 with open(output_file, "w") as fasta_out:

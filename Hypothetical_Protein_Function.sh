@@ -7,7 +7,7 @@ Usage:
 -h  Displays help page.
 -c  Optional flag to compare protein function annotation in header sequence to this script's output.
 -e  Optional flag to extract amino acid sequences denoted as hypothetical in the fasta header.
--g  Optional .gbff file from which amino acid sequences will randomly be extracted and compared to this script's output.
+-g  Optional .gbff or .gbk file from which amino acid sequences will randomly be extracted and compared to this script's output.
 -r  Optional flag to remove duplicate fasta entries.
 -f  Fasta file containing amino acid sequences.
 -p  Optional word number (character string separated by whitespace) or regex pattern to match annotated function in fasta header.
@@ -23,7 +23,7 @@ This script determines protein function based on the amino acid sequences provid
 
 If the '-c' option is used with '-g', only the fasta file derived from the .gbff file will be used for protein function determination.
 
-Keep in mind that the Biopython module is required to parse the .gbff file if included.
+Keep in mind that the Biopython module is required to parse the .gbff or .gbk file if included.
 
 Each sequence is trimmed to the first 400 amino acids and then submitted to the ESMFold API:
     "https://api.esmatlas.com/foldSequence/v1/pdb/"

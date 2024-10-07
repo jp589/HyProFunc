@@ -55,7 +55,7 @@ Installation is simple:
 -h  Displays help page.  
 -c  Optional flag to compare protein function annotation in header sequence to this script's output.  
 -e  Optional flag to extract amino acid sequences denoted as hypothetical in the fasta header.  
--g  Optional .gbff file from which amino acid sequences will randomly be extracted and compared to this script's output.  
+-g  Optional .gbff or .gbk file from which amino acid sequences will randomly be extracted and compared to this script's output.  
 -r  Optional flag to remove duplicate fasta entries.  
 -f  Fasta file containing amino acid sequences.  
 -p Optional word number (character string separated by whitespace) or regex pattern to match annotated function in fasta header. Default behavior is to extract all characters after the second whitespace. This is only needed when comparing functional annotation in the header sequence to this script's output. Example generic regex pattern: `'r">.*(.*).*\s"'
